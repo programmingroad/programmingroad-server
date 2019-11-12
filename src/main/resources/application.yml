@@ -1,0 +1,20 @@
+# spring 相关配置
+spring:
+  redis:
+    host: 192.168.233.129
+    port: 6379
+  jackson:
+    default-property-inclusion: non_empty
+
+# http相关配置
+httpclient:
+  conTimeout: 3000   #连接超时时间
+  soTimeout: 30000   #响应超时时间
+
+# github相关配置
+github:
+  clientId: 90311b932a081ea68e12
+  clientSecret: 3bfa18de6d5e89050a898d8e696c176ce96b8973
+  accessTokenUrl: https://github.com/login/oauth/access_token
+  userUrl: https://api.github.com/user
+  login: programmingroad
