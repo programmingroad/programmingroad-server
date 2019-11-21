@@ -23,11 +23,19 @@ public interface UserService {
     UserVO login(String code, HttpServletResponse response);
 
     /**
-     * 通过token获取用户信息
+     * 登出
      *
-     * @param request
+     * @param token
+     * @param response
+     */
+    void logout(String token, HttpServletResponse response);
+
+    /**
+     * 通过token获取用户
+     *
+     * @param token
      * @return
      */
-    UserVO getUser(HttpServletRequest request);
+    UserVO getUser(String token);
 
 }

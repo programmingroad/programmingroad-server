@@ -1,11 +1,10 @@
 package com.programmingroad.blog.handler;
 
-import com.programmingroad.blog.exception.AuthorizeException;
+import com.programmingroad.blog.exception.BlogException;
+import com.programmingroad.blog.utils.ResultUtil;
 import com.programmingroad.blog.vo.ResultVO;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * @author: programmingroad
@@ -16,10 +15,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class BlogExceptionHandler {
 
-    @ExceptionHandler(value = AuthorizeException.class)
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public ResultVO handlerAuthorizeException() {
-        // todo
-        return null;
+    @ExceptionHandler(value = BlogException.class)
+    public ResultVO handlerBlogException(BlogException blogException) {
+
+        return ResultUtil.result(blogException.getCode(), blogException.getMessage(), null);
     }
 }

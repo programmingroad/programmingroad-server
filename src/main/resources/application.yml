@@ -1,7 +1,7 @@
 # spring 相关配置
 spring:
   redis:
-    host: 192.168.233.129
+    host: 101.200.126.20
     port: 6379
   jackson:
     default-property-inclusion: non_empty
@@ -18,3 +18,7 @@ github:
   accessTokenUrl: https://github.com/login/oauth/access_token
   userUrl: https://api.github.com/user
   login: programmingroad
+
+  # 端口配置
+server:
+  port: 80

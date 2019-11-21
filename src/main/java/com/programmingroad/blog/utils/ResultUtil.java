@@ -13,27 +13,20 @@ public class ResultUtil {
     /**
      * 返回result
      *
-     * @param resultEnum
+     * @param code
+     * @param message
+     * @param object
      * @return
      */
-    private static ResultVO result(ResultEnum resultEnum, Object object) {
+    public static ResultVO result(Integer code, String message, Object object) {
 
         ResultVO resultVO = new ResultVO();
 
-        resultVO.setCode(resultEnum.getCode());
-        resultVO.setMessage(resultEnum.getMessage());
+        resultVO.setCode(code);
+        resultVO.setMessage(message);
         resultVO.setBody(object);
 
         return resultVO;
-    }
-
-    /**
-     * 成功
-     *
-     * @return
-     */
-    public static ResultVO success() {
-        return success(null);
     }
 
     /**
@@ -46,18 +39,6 @@ public class ResultUtil {
 
         ResultEnum success = ResultEnum.SUCCESS;
 
-        return result(success, object);
-    }
-
-    /**
-     * 错误
-     *
-     * @return
-     */
-    public static ResultVO error() {
-
-        ResultEnum error = ResultEnum.ERROR;
-
-        return result(error, null);
+        return result(success.getCode(), success.getMessage(), object);
     }
 }

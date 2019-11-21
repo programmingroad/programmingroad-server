@@ -63,18 +63,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserVO getUser(HttpServletRequest request) {
+    public void logout(String token, HttpServletResponse response) {
 
-        Cookie cookie = CookieUtil.get(request, CookieConstant.TOKEN);
+        String key = String.format(RedisConstant.TOKEN_PREFIX, token);
 
-        if (cookie == null) {
+        stringRedisTemplate.delete(key);
 
-            log.warn("cookie为null");
+        CookieUtil.set(response, CookieConstant.TOKEN, null, 0);
+    }
 
-            return null;
-        }
+    @Override
+    public UserVO getUser(String token) {
 
-        String key = String.format(RedisConstant.TOKEN_PREFIX, cookie.getValue());
+        String key = String.format(RedisConstant.TOKEN_PREFIX, token);
 
         String value = stringRedisTemplate.opsForValue().get(key);
 
