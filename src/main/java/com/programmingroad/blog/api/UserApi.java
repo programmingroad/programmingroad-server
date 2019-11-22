@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  * @description:
  **/
 
-@Api(tags = "user")
+@Api(tags = "User")
 @RestController
 @RequestMapping(value = "/api/user")
 @Slf4j
@@ -60,7 +60,7 @@ public class UserApi {
     }
 
     @ApiOperation(value = "通过token获取用户信息")
-    @GetMapping("/get")
+    @GetMapping("/user")
     public ResultVO<UserVO> getUser(HttpServletRequest request) {
 
         String token = this.getToken(request);

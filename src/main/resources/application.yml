@@ -1,10 +1,20 @@
 # spring 相关配置
 spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://101.200.126.20:3306/programmingroad
+    username: root
+    password: root
   redis:
     host: 101.200.126.20
     port: 6379
   jackson:
     default-property-inclusion: non_empty
+    date-format: yyyy-MM-dd HH:mm:ss
+
+# mp相关配置
+mybatis-plus:
+  type-enums-package: com.programmingroad.blog.enums
 
 # http相关配置
 httpclient:
@@ -19,6 +29,6 @@ github:
   userUrl: https://api.github.com/user
   login: programmingroad
 
-  # 端口配置
+# 端口配置
 server:
   port: 80

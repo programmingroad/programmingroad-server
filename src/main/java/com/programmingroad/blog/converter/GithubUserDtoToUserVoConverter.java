@@ -7,11 +7,17 @@ import org.springframework.beans.BeanUtils;
 /**
  * @author: programmingroad
  * @create: 2019/10/06 12:50
- * @description:  GithubUserDTO -> UserVO 转换器
+ * @description: GithubUserDTO -> UserVO 转换器
  **/
 
 public class GithubUserDtoToUserVoConverter {
 
+    /**
+     * GithubUserDTO -> UserVO
+     *
+     * @param githubUserDTO
+     * @return
+     */
     public static UserVO converter(GithubUserDTO githubUserDTO) {
 
         UserVO userVO = new UserVO();
