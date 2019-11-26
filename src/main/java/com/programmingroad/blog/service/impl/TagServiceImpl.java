@@ -1,5 +1,6 @@
 package com.programmingroad.blog.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.programmingroad.blog.converter.TagToTagVoConverter;
 import com.programmingroad.blog.domain.Tag;
 import com.programmingroad.blog.mapper.TagMapper;
@@ -28,7 +29,8 @@ public class TagServiceImpl implements TagService {
     @Override
     public List<TagVO> list() {
 
-        List<Tag> tags = tagMapper.selectList(null);
+
+        List<Tag> tags = tagMapper.selectList(Wrappers.<Tag>query().orderByDesc("create_time"));
 
         return TagToTagVoConverter.converter(tags);
 
