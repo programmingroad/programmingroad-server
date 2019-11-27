@@ -7,7 +7,13 @@ package com.programmingroad.blog.constant;
  **/
 public interface CookieConstant {
 
+    /**
+     * token key
+     */
     String TOKEN = "token";
 
+    /**
+     * token expire
+     */
     Integer EXPIRE = 7200;
 }

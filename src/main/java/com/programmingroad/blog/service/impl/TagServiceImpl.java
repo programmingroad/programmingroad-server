@@ -1,7 +1,7 @@
 package com.programmingroad.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.programmingroad.blog.converter.TagToTagVoConverter;
+import com.programmingroad.blog.converter.Tag2TagVOConverter;
 import com.programmingroad.blog.domain.Tag;
 import com.programmingroad.blog.mapper.TagMapper;
 import com.programmingroad.blog.service.TagService;
@@ -32,7 +32,7 @@ public class TagServiceImpl implements TagService {
 
         List<Tag> tags = tagMapper.selectList(Wrappers.<Tag>query().orderByDesc("create_time"));
 
-        return TagToTagVoConverter.converter(tags);
+        return Tag2TagVOConverter.converter(tags);
 
     }
 

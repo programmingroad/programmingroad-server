@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * @description:
  * @version: 1.0
  **/
-public class TagToTagVoConverter {
+public class Tag2TagVOConverter {
 
     /**
      * Tag -> TagVO

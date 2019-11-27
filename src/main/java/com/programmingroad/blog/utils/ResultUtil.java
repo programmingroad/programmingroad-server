@@ -1,6 +1,9 @@
 package com.programmingroad.blog.utils;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.programmingroad.blog.enums.ResultEnum;
+import com.programmingroad.blog.vo.ResultHeadVO;
+import com.programmingroad.blog.vo.ResultPageVO;
 import com.programmingroad.blog.vo.ResultVO;
 
 /**
@@ -13,18 +16,19 @@ public class ResultUtil {
     /**
      * 返回result
      *
-     * @param code
-     * @param message
+     * @param resultHeadVO
      * @param object
+     * @param resultPageVO
      * @return
      */
-    public static ResultVO result(Integer code, String message, Object object) {
+    public static ResultVO result(ResultHeadVO resultHeadVO, Object object, ResultPageVO resultPageVO) {
 
         ResultVO resultVO = new ResultVO();
 
-        resultVO.setCode(code);
-        resultVO.setMessage(message);
+        resultVO.setHead(resultHeadVO);
         resultVO.setBody(object);
+        resultVO.setPage(resultPageVO);
+
 
         return resultVO;
     }
@@ -39,6 +43,25 @@ public class ResultUtil {
 
         ResultEnum success = ResultEnum.SUCCESS;
 
-        return result(success.getCode(), success.getMessage(), object);
+        ResultHeadVO resultHeadVO = new ResultHeadVO();
+
+        resultHeadVO.setCode(success.getCode());
+        resultHeadVO.setMessage(success.getMessage());
+
+        if (object instanceof IPage) {
+
+            IPage objectIPage = (IPage) object;
+
+            ResultPageVO resultPageVO = new ResultPageVO();
+
+            resultPageVO.setCurrPage(objectIPage.getCurrent());
+            resultPageVO.setPageSize(objectIPage.getSize());
+            resultPageVO.setTotalCount(objectIPage.getTotal());
+            resultPageVO.setTotalPage(objectIPage.getPages());
+
+            return result(resultHeadVO, objectIPage.getRecords(), resultPageVO);
+        }
+
+        return result(resultHeadVO, object, null);
     }
 }

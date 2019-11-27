@@ -4,7 +4,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -15,7 +14,7 @@ import java.util.Date;
  **/
 
 @Data
-@ApiModel(value = "标签返回体")
+@ApiModel(value = "TagVO")
 public class TagVO {
 
     @ApiModelProperty(value = "标签id")

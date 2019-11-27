@@ -11,16 +11,16 @@ import lombok.Data;
  **/
 
 @Data
-@ApiModel(value = "结果返回体")
+@ApiModel(value = "ResultVO")
 public class ResultVO<T> {
 
-    @ApiModelProperty(value = "状态码")
-    private Integer code;
+    @ApiModelProperty(value = "head")
+    private ResultHeadVO head;
 
-    @ApiModelProperty(value = "状态码对应的提示信息")
-    private String message;
-
-    @ApiModelProperty(value = "返回体")
+    @ApiModelProperty(value = "body")
     private T body;
+
+    @ApiModelProperty(value = "page")
+    private ResultPageVO page;
 
 }

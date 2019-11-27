@@ -3,7 +3,7 @@ package com.programmingroad.blog.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.programmingroad.blog.constant.CookieConstant;
 import com.programmingroad.blog.constant.RedisConstant;
-import com.programmingroad.blog.converter.GithubUserDtoToUserVoConverter;
+import com.programmingroad.blog.converter.GithubUserDTO2UserVOConverter;
 import com.programmingroad.blog.platform.github.dto.GithubUserDTO;
 import com.programmingroad.blog.platform.github.service.GithubService;
 import com.programmingroad.blog.service.UserService;
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
         // 配置token到cookie
         CookieUtil.set(response, CookieConstant.TOKEN, token, CookieConstant.EXPIRE);
 
-        UserVO userVO = GithubUserDtoToUserVoConverter.converter(githubUserDTO);
+        UserVO userVO = GithubUserDTO2UserVOConverter.converter(githubUserDTO);
 
         return userVO;
     }
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
 
         GithubUserDTO githubUserDTO = JSON.parseObject(value, GithubUserDTO.class);
 
-        UserVO userVO = GithubUserDtoToUserVoConverter.converter(githubUserDTO);
+        UserVO userVO = GithubUserDTO2UserVOConverter.converter(githubUserDTO);
 
         return userVO;
     }

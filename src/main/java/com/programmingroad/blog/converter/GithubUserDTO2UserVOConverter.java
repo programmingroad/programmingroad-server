@@ -10,7 +10,7 @@ import org.springframework.beans.BeanUtils;
  * @description: GithubUserDTO -> UserVO 转换器
  **/
 
-public class GithubUserDtoToUserVoConverter {
+public class GithubUserDTO2UserVOConverter {
 
     /**
      * GithubUserDTO -> UserVO

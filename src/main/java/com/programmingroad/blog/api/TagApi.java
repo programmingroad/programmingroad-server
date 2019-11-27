@@ -41,7 +41,7 @@ public class TagApi {
     }
 
     @ApiOperation(value = "添加标签")
-    @PostMapping("/add")
+    @PutMapping("/add")
     public ResultVO<TagVO> add(@ApiParam(value = "标签名称", required = true) @RequestParam("name") String name) {
 
         log.info("【Tag】添加标签: name={};", name);
@@ -52,8 +52,8 @@ public class TagApi {
     }
 
     @ApiOperation(value = "删除标签")
-    @PostMapping("/delete")
-    public ResultVO<TagVO> delete(@ApiParam(value = "标签id", required = true) @RequestParam("id") Long id) {
+    @DeleteMapping("/delete/{id}")
+    public ResultVO<TagVO> delete(@ApiParam(value = "标签id", required = true) @PathVariable Long id) {
 
         log.info("【Tag】删除标签: id={};", id);
 
@@ -61,5 +61,4 @@ public class TagApi {
 
         return ResultUtil.success(null);
     }
-
 }
