@@ -66,9 +66,9 @@ public class ArticleApi {
     }
 
     @ApiOperation(value = "更新文章")
-    @PatchMapping("/update")
-    public ResultVO update(@ApiParam(value = "文章id", required = true) @RequestParam("id") Long id, @RequestBody ArticleDTO articleDTO) {
-        
+    @PatchMapping("/update/{id}")
+    public ResultVO update(@ApiParam(value = "文章id", required = true) @PathVariable Long id, @RequestBody ArticleDTO articleDTO) {
+
         articleService.update(id, articleDTO);
 
         return ResultUtil.success(null);
