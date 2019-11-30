@@ -1,5 +1,6 @@
 package com.programmingroad.blog.dto;
 
+import com.programmingroad.blog.enums.ReleasedEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -23,5 +24,8 @@ public class ArticleDTO {
 
     @ApiModelProperty(value = "内容")
     private String content;
+
+    @ApiModelProperty(value = "是否发布")
+    private ReleasedEnum released;
 
 }
