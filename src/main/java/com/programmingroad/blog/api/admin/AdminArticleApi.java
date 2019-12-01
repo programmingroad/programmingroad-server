@@ -1,4 +1,4 @@
-package com.programmingroad.blog.api;
+package com.programmingroad.blog.api.admin;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.programmingroad.blog.dto.ArticleDTO;
@@ -25,9 +25,9 @@ import java.util.List;
 
 @Api(tags = "Article")
 @RestController
-@RequestMapping(value = "/api/article")
+@RequestMapping(value = "/api/admin/article")
 @Slf4j
-public class ArticleApi {
+public class AdminArticleApi {
 
     @Autowired
     ArticleService articleService;

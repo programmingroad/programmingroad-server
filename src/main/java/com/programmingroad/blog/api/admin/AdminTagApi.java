@@ -1,4 +1,4 @@
-package com.programmingroad.blog.api;
+package com.programmingroad.blog.api.admin;
 
 import com.programmingroad.blog.service.TagService;
 import com.programmingroad.blog.utils.ResultUtil;
@@ -22,9 +22,9 @@ import java.util.List;
 
 @Api(tags = "Tag")
 @RestController
-@RequestMapping(value = "/api/tag")
+@RequestMapping(value = "/api/admin/tag")
 @Slf4j
-public class TagApi {
+public class AdminTagApi {
 
     @Autowired
     TagService tagService;

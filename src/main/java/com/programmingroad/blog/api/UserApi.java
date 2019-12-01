@@ -51,7 +51,6 @@ public class UserApi {
 
         String token = this.getToken(request);
 
-
         log.info("【User】登出参数: token={};", token);
 
         userService.logout(token, response);
