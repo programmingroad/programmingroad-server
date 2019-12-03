@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  * @description:
  **/
 
-@Api(tags = "User")
+@Api(tags = "UserApi")
 @RestController
 @RequestMapping(value = "/api/user")
 @Slf4j

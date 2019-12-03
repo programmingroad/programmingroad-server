@@ -3,6 +3,7 @@ package com.programmingroad.blog.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.programmingroad.blog.dto.ArticleDTO;
+import com.programmingroad.blog.enums.ReleasedEnum;
 import com.programmingroad.blog.vo.ArticleVO;
 
 import java.util.List;
@@ -19,9 +20,11 @@ public interface ArticleService {
      * 分页获取文章
      *
      * @param currPage 要获取的页码
+     * @param tagId    tagId
+     * @param released 是否发布
      * @return
      */
-    IPage<ArticleVO> listPage(Integer currPage);
+    IPage<ArticleVO> listPage(Integer currPage, Long tagId, ReleasedEnum released);
 
     /**
      * 添加文章

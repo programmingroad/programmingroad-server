@@ -23,7 +23,7 @@ import java.util.List;
  * @version: 1.0
  **/
 
-@Api(tags = "Article")
+@Api(tags = "AdminArticleApi")
 @RestController
 @RequestMapping(value = "/api/admin/article")
 @Slf4j
@@ -38,7 +38,7 @@ public class AdminArticleApi {
 
         log.info("【Article】获取文章列表");
 
-        IPage<ArticleVO> articleVOIPage = articleService.listPage(page);
+        IPage<ArticleVO> articleVOIPage = articleService.listPage(page, null, null);
 
         return ResultUtil.success(articleVOIPage);
     }

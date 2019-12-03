@@ -1,5 +1,6 @@
 package com.programmingroad.blog.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -8,6 +9,7 @@ import com.programmingroad.blog.converter.Article2ArticleVOConverter;
 import com.programmingroad.blog.converter.ArticleDTO2Article;
 import com.programmingroad.blog.domain.Article;
 import com.programmingroad.blog.dto.ArticleDTO;
+import com.programmingroad.blog.enums.ReleasedEnum;
 import com.programmingroad.blog.mapper.ArticleMapper;
 import com.programmingroad.blog.service.ArticleService;
 import com.programmingroad.blog.vo.ArticleVO;
@@ -30,11 +32,23 @@ public class ArticleServiceImpl implements ArticleService {
     ArticleMapper articleMapper;
 
     @Override
-    public IPage<ArticleVO> listPage(Integer currPage) {
+    public IPage<ArticleVO> listPage(Integer currPage, Long tagId, ReleasedEnum released) {
 
         Page<Article> articlePage = new Page<>(currPage, Constant.PAGE_SIZE);
 
-        IPage<Article> articleIPage = articleMapper.selectPage(articlePage, Wrappers.<Article>query().orderByDesc("create_time"));
+        QueryWrapper query = new QueryWrapper();
+        // 是否添加 tagId 筛选条件
+        if (tagId != null) {
+            query.eq("tagId", tagId);
+        }
+        // 是否添加 released 筛选条件
+        if (released != null) {
+            query.eq("released", released);
+        }
+        // 按照 create_time 倒序排列
+        query.orderByDesc("create_time");
+
+        IPage<Article> articleIPage = articleMapper.selectPage(articlePage, query);
 
         return articleIPage.convert(article -> (Article2ArticleVOConverter.converter(article)));
 

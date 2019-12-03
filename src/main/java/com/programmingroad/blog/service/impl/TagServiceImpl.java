@@ -28,8 +28,7 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public List<TagVO> list() {
-
-
+        // 按照 create_time 降序查询
         List<Tag> tags = tagMapper.selectList(Wrappers.<Tag>query().orderByDesc("create_time"));
 
         return Tag2TagVOConverter.converter(tags);

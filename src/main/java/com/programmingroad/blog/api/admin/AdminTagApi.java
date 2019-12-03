@@ -20,7 +20,7 @@ import java.util.List;
  * @version: 1.0
  **/
 
-@Api(tags = "Tag")
+@Api(tags = "AdminTagApi")
 @RestController
 @RequestMapping(value = "/api/admin/tag")
 @Slf4j
