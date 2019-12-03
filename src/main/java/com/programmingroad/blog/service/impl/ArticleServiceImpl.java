@@ -1,6 +1,6 @@
 package com.programmingroad.blog.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -33,25 +33,20 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public IPage<ArticleVO> listPage(Integer currPage, Long tagId, ReleasedEnum released) {
-
-        Page<Article> articlePage = new Page<>(currPage, Constant.PAGE_SIZE);
-
-        QueryWrapper query = new QueryWrapper();
+        LambdaQueryWrapper<Article> select = Wrappers.<Article>lambdaQuery()
+                .select(Article::getId, Article::getTitle, Article::getCreateTime);
         // 是否添加 tagId 筛选条件
         if (tagId != null) {
-            query.eq("tagId", tagId);
+            select.eq(Article::getTagId, tagId);
         }
         // 是否添加 released 筛选条件
         if (released != null) {
-            query.eq("released", released);
+            select.eq(Article::getReleased, released);
         }
         // 按照 create_time 倒序排列
-        query.orderByDesc("create_time");
-
-        IPage<Article> articleIPage = articleMapper.selectPage(articlePage, query);
-
+        select.orderByDesc(Article::getCreateTime);
+        IPage<Article> articleIPage = articleMapper.selectPage(new Page<>(currPage, Constant.PAGE_SIZE), select);
         return articleIPage.convert(article -> (Article2ArticleVOConverter.converter(article)));
-
     }
 
     @Override
@@ -60,6 +55,16 @@ public class ArticleServiceImpl implements ArticleService {
         Article article = ArticleDTO2Article.converter(articleDTO);
 
         articleMapper.insert(article);
+    }
+
+    @Override
+    public ArticleVO get(Long id, ReleasedEnum released) {
+        LambdaQueryWrapper<Article> select = Wrappers.<Article>lambdaQuery().eq(Article::getId, id);
+        if (released != null) {
+            select.eq(Article::getReleased, released);
+        }
+        Article article = articleMapper.selectOne(select);
+        return Article2ArticleVOConverter.converter(article);
     }
 
     @Override

@@ -63,4 +63,5 @@ public class Article {
      */
     @TableLogic
     private DeletedEnum deleted;
+
 }

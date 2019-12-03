@@ -34,6 +34,14 @@ public interface ArticleService {
     void add(ArticleDTO articleDTO);
 
     /**
+     * 获取指定文章
+     *
+     * @param id
+     * @return
+     */
+    ArticleVO get(Long id, ReleasedEnum released);
+
+    /**
      * 删除文章
      *
      * @param id

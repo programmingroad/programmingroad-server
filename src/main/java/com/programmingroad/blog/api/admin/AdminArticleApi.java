@@ -34,7 +34,7 @@ public class AdminArticleApi {
 
     @ApiOperation(value = "文章列表")
     @GetMapping("/listPage")
-    public ResultVO<ArticleVO> getListPage(@ApiParam(value = "页码", required = true) @RequestParam("page") Integer page) {
+    public ResultVO<List<ArticleVO>> getListPage(@ApiParam(value = "页码", required = true) @RequestParam("page") Integer page) {
 
         log.info("【Article】获取文章列表");
 

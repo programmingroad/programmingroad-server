@@ -11,10 +11,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author: baoqi.liu
@@ -34,13 +33,21 @@ public class ArticleApi {
 
     @ApiOperation(value = "通过标签获取已发布文章列表")
     @GetMapping("/listPage")
-    public ResultVO<ArticleVO> getListPage(@ApiParam(value = "页码", required = true) @RequestParam("page") Integer page, @ApiParam(value = "标签id", required = true) @RequestParam("tagId") Long tagId) {
+    public ResultVO<List<ArticleVO>> getListPage(@ApiParam(value = "页码", required = true) @RequestParam("page") Integer page, @ApiParam(value = "标签id", required = true) @RequestParam("tagId") Long tagId) {
 
         log.info("【Article】获取文章列表");
 
         IPage<ArticleVO> articleVOIPage = articleService.listPage(page, tagId, ReleasedEnum.RELEASED);
 
         return ResultUtil.success(articleVOIPage);
+    }
+
+    @ApiOperation(value = "通过id获取文章")
+    @GetMapping("/article/{id}")
+    public ResultVO<ArticleVO> getContent(@ApiParam(value = "文章id", required = true) @PathVariable Long id) {
+        ArticleVO articleVO = articleService.get(id, ReleasedEnum.RELEASED);
+
+        return ResultUtil.success(articleVO);
     }
 
 }
