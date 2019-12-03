@@ -2,7 +2,6 @@ package com.programmingroad.blog.converter;
 
 import com.programmingroad.blog.domain.Tag;
 import com.programmingroad.blog.vo.TagVO;
-import com.programmingroad.blog.vo.UserVO;
 import org.springframework.beans.BeanUtils;
 
 import java.util.List;

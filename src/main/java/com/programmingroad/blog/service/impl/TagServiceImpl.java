@@ -38,9 +38,9 @@ public class TagServiceImpl implements TagService {
     @Override
     public void add(String name) {
 
-        Tag tag = new Tag();
-
-        tag.setName(name);
+        Tag tag = Tag.builder()
+                .name(name)
+                .build();
 
         tagMapper.insert(tag);
     }

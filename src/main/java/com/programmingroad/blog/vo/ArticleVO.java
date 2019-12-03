@@ -2,7 +2,7 @@ package com.programmingroad.blog.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.*;
 
 import java.util.Date;
 
@@ -14,6 +14,9 @@ import java.util.Date;
  **/
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel(value = "ArticleVO")
 public class ArticleVO {
 

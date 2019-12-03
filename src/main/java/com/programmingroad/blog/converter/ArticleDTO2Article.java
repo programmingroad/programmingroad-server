@@ -2,7 +2,6 @@ package com.programmingroad.blog.converter;
 
 import com.programmingroad.blog.domain.Article;
 import com.programmingroad.blog.dto.ArticleDTO;
-import com.programmingroad.blog.vo.ArticleVO;
 import org.springframework.beans.BeanUtils;
 
 /**

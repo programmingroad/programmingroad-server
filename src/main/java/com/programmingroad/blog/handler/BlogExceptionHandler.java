@@ -19,10 +19,10 @@ public class BlogExceptionHandler {
     @ExceptionHandler(value = BlogException.class)
     public ResultVO handlerBlogException(BlogException blogException) {
 
-        ResultHeadVO resultHeadVO = new ResultHeadVO();
-
-        resultHeadVO.setCode(blogException.getCode());
-        resultHeadVO.setMessage(blogException.getMessage());
+        ResultHeadVO resultHeadVO = ResultHeadVO.builder()
+                .code(blogException.getCode())
+                .message(blogException.getMessage())
+                .build();
 
         return ResultUtil.result(resultHeadVO, null, null);
     }

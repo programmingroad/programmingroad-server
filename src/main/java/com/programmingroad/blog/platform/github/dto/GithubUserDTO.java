@@ -1,6 +1,9 @@
 package com.programmingroad.blog.platform.github.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author: programmingroad
@@ -9,6 +12,9 @@ import lombok.Data;
  **/
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class GithubUserDTO {
 
     /**

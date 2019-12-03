@@ -3,7 +3,10 @@ package com.programmingroad.blog.dto;
 import com.programmingroad.blog.enums.ReleasedEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author: baoqi.liu
@@ -13,6 +16,9 @@ import lombok.Data;
  **/
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel(value = "ArticleDTO")
 public class ArticleDTO {
 

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.programmingroad.blog.enums.DeletedEnum;
 import com.programmingroad.blog.enums.ReleasedEnum;
-import lombok.Data;
+import lombok.*;
 
 import java.sql.Timestamp;
 
@@ -17,6 +17,9 @@ import java.sql.Timestamp;
  **/
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Article {
 
     /**

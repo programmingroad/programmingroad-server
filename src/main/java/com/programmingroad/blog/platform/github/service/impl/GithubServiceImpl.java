@@ -36,12 +36,12 @@ public class GithubServiceImpl implements GithubService {
 
         JSONObject jsonObject = JSON.parseObject(githubUserStr);
 
-        GithubUserDTO githubUserDTO = new GithubUserDTO();
-
-        githubUserDTO.setId(jsonObject.getLong(GithubConstant.ID));
-        githubUserDTO.setLogin(jsonObject.getString(GithubConstant.LOGIN));
-        githubUserDTO.setAvatarUrl(jsonObject.getString(GithubConstant.AVATAR_URL));
-        githubUserDTO.setHtmlUrl(jsonObject.getString(GithubConstant.HTML_URL));
+        GithubUserDTO githubUserDTO = GithubUserDTO.builder()
+                .id(jsonObject.getLong(GithubConstant.ID))
+                .login(jsonObject.getString(GithubConstant.LOGIN))
+                .avatarUrl(jsonObject.getString(GithubConstant.AVATAR_URL))
+                .htmlUrl(jsonObject.getString(GithubConstant.HTML_URL))
+                .build();
 
         log.info("生成dto: githubUserDTO={};", githubUserDTO);
 

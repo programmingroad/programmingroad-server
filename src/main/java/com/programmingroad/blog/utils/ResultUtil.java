@@ -22,15 +22,11 @@ public class ResultUtil {
      * @return
      */
     public static ResultVO result(ResultHeadVO resultHeadVO, Object object, ResultPageVO resultPageVO) {
-
-        ResultVO resultVO = new ResultVO();
-
-        resultVO.setHead(resultHeadVO);
-        resultVO.setBody(object);
-        resultVO.setPage(resultPageVO);
-
-
-        return resultVO;
+        return ResultVO.builder()
+                .head(resultHeadVO)
+                .body(object)
+                .page(resultPageVO)
+                .build();
     }
 
     /**
@@ -40,28 +36,25 @@ public class ResultUtil {
      * @return
      */
     public static ResultVO success(Object object) {
-
         ResultEnum success = ResultEnum.SUCCESS;
 
-        ResultHeadVO resultHeadVO = new ResultHeadVO();
-
-        resultHeadVO.setCode(success.getCode());
-        resultHeadVO.setMessage(success.getMessage());
+        ResultHeadVO resultHeadVO = ResultHeadVO.builder()
+                .code(success.getCode())
+                .message(success.getMessage())
+                .build();
 
         if (object instanceof IPage) {
-
             IPage objectIPage = (IPage) object;
 
-            ResultPageVO resultPageVO = new ResultPageVO();
-
-            resultPageVO.setCurrPage(objectIPage.getCurrent());
-            resultPageVO.setPageSize(objectIPage.getSize());
-            resultPageVO.setTotalCount(objectIPage.getTotal());
-            resultPageVO.setTotalPage(objectIPage.getPages());
+            ResultPageVO resultPageVO = ResultPageVO.builder()
+                    .currPage(objectIPage.getCurrent())
+                    .pageSize(objectIPage.getSize())
+                    .totalCount(objectIPage.getTotal())
+                    .totalPage(objectIPage.getPages())
+                    .build();
 
             return result(resultHeadVO, objectIPage.getRecords(), resultPageVO);
         }
-
         return result(resultHeadVO, object, null);
     }
 }
