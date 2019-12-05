@@ -30,7 +30,3 @@ github:
   accessTokenUrl: https://github.com/login/oauth/access_token
   userUrl: https://api.github.com/user
   login: programmingroad
-
-# 端口配置
-server:
-  port: 80
