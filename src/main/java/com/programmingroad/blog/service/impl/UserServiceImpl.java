@@ -5,7 +5,7 @@ import com.programmingroad.blog.constant.CookieConstant;
 import com.programmingroad.blog.constant.RedisConstant;
 import com.programmingroad.blog.converter.GithubUserDTO2UserVOConverter;
 import com.programmingroad.blog.enums.ResultEnum;
-import com.programmingroad.blog.exception.GlobalException;
+import com.programmingroad.blog.exception.CustomizeException;
 import com.programmingroad.blog.platform.github.dto.GithubUserDTO;
 import com.programmingroad.blog.platform.github.service.GithubService;
 import com.programmingroad.blog.service.UserService;
@@ -32,19 +32,19 @@ import java.util.concurrent.TimeUnit;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    GithubService githubService;
+    private GithubService githubService;
 
     @Autowired
-    StringRedisTemplate stringRedisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
     @Value("${github.login}")
-    String login;
+    private String login;
 
     @Override
     public UserVO login(String code, HttpServletResponse response) {
         GithubUserDTO githubUserDTO = githubService.getGithubUserByCode(code);
         if (!githubUserDTO.getLogin().equals(login)) {
-            throw new GlobalException(ResultEnum.FORBIDDEN);
+            throw new CustomizeException(ResultEnum.FORBIDDEN);
         }
         String token = UUID.randomUUID().toString();
         String key = String.format(RedisConstant.TOKEN_PREFIX, token);

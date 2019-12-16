@@ -1,3 +1,7 @@
+## blog 相关配置
+blog:
+  static-locations: D:\blog\image
+
 # spring 相关配置
 spring:
   datasource:
@@ -11,6 +15,8 @@ spring:
   jackson:
     default-property-inclusion: non_null
     date-format: yyyy-MM-dd HH:mm:ss
+  resources:
+    static-locations: file:${blog.static-locations}
 
 # mp相关配置
 mybatis-plus:

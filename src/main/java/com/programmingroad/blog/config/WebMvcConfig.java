@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Autowired
-    RestInterceptor restInterceptor;
+    private RestInterceptor restInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

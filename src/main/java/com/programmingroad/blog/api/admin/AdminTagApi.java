@@ -27,7 +27,7 @@ import java.util.List;
 public class AdminTagApi {
 
     @Autowired
-    TagService tagService;
+    private TagService tagService;
 
     @ApiOperation(value = "获取所有标签")
     @GetMapping("/all")

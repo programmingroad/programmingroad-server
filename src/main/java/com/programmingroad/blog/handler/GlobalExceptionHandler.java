@@ -1,9 +1,9 @@
 package com.programmingroad.blog.handler;
 
-import com.programmingroad.blog.exception.GlobalException;
+import com.programmingroad.blog.enums.ResultEnum;
+import com.programmingroad.blog.exception.CustomizeException;
 import com.programmingroad.blog.utils.ResultUtil;
 import com.programmingroad.blog.vo.ResultVO;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -16,8 +16,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(value = GlobalException.class)
-    public ResultVO handlerBlogException(GlobalException globalException) {
-        return ResultUtil.error(globalException.getResultEnum());
+    @ExceptionHandler(value = CustomizeException.class)
+    public ResultVO handlerCustomizeException(CustomizeException customizeException) {
+        return ResultUtil.error(customizeException.getResultEnum());
+    }
+
+    @ExceptionHandler(value = Exception.class)
+    public ResultVO handleException() {
+        return ResultUtil.error(ResultEnum.INTERNAL_SERVER_ERROR);
     }
 }

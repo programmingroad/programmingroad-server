@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 public class GithubServiceImpl implements GithubService {
 
     @Autowired
-    GithubManager githubManager;
+    private GithubManager githubManager;
 
     @Override
     public GithubUserDTO getGithubUserByCode(String code) {

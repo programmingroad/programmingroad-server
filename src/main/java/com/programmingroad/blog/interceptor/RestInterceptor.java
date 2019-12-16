@@ -2,7 +2,7 @@ package com.programmingroad.blog.interceptor;
 
 import com.programmingroad.blog.constant.RedisConstant;
 import com.programmingroad.blog.enums.ResultEnum;
-import com.programmingroad.blog.exception.GlobalException;
+import com.programmingroad.blog.exception.CustomizeException;
 import com.programmingroad.blog.utils.CookieUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 public class RestInterceptor implements HandlerInterceptor {
 
     @Autowired
-    StringRedisTemplate stringRedisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -31,7 +31,7 @@ public class RestInterceptor implements HandlerInterceptor {
         String key = String.format(RedisConstant.TOKEN_PREFIX, token);
         Boolean hasKey = stringRedisTemplate.hasKey(key);
         if (!hasKey) {
-            throw new GlobalException(ResultEnum.UNAUTHORIZED);
+            throw new CustomizeException(ResultEnum.UNAUTHORIZED);
         }
         return true;
     }

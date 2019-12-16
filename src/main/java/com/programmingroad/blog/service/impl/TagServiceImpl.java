@@ -24,7 +24,7 @@ import java.util.List;
 public class TagServiceImpl implements TagService {
 
     @Autowired
-    TagMapper tagMapper;
+    private TagMapper tagMapper;
 
     @Override
     public List<TagVO> list() {

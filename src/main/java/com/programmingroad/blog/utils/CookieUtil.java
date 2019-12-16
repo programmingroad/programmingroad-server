@@ -2,7 +2,7 @@ package com.programmingroad.blog.utils;
 
 import com.programmingroad.blog.constant.CookieConstant;
 import com.programmingroad.blog.enums.ResultEnum;
-import com.programmingroad.blog.exception.GlobalException;
+import com.programmingroad.blog.exception.CustomizeException;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.Cookie;
@@ -74,7 +74,7 @@ public class CookieUtil {
         Cookie cookie = get(request, CookieConstant.TOKEN);
         if (cookie == null) {
             log.warn("cookie为null");
-            throw new GlobalException(ResultEnum.UNAUTHORIZED);
+            throw new CustomizeException(ResultEnum.UNAUTHORIZED);
         }
         return cookie.getValue();
     }

@@ -1,8 +1,5 @@
 package com.programmingroad.blog.api;
 
-import com.programmingroad.blog.constant.CookieConstant;
-import com.programmingroad.blog.enums.ResultEnum;
-import com.programmingroad.blog.exception.GlobalException;
 import com.programmingroad.blog.service.UserService;
 import com.programmingroad.blog.utils.CookieUtil;
 import com.programmingroad.blog.utils.ResultUtil;
@@ -15,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -32,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UserApi {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @ApiOperation(value = "登录")
     @PostMapping("/login")

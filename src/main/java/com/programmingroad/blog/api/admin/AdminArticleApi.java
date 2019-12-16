@@ -29,7 +29,7 @@ import java.util.List;
 public class AdminArticleApi {
 
     @Autowired
-    ArticleService articleService;
+    private ArticleService articleService;
 
     @ApiOperation(value = "文章列表")
     @GetMapping("/listPage")

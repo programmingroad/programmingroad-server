@@ -29,7 +29,7 @@ import org.springframework.stereotype.Service;
 public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
-    ArticleMapper articleMapper;
+    private ArticleMapper articleMapper;
 
     @Override
     public IPage<ArticleVO> listPage(Integer currPage, Long tagId, ReleasedEnum released) {

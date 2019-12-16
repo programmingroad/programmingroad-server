@@ -10,11 +10,11 @@ import lombok.Getter;
  **/
 
 @Getter
-public class GlobalException extends RuntimeException {
+public class CustomizeException extends RuntimeException {
 
     private ResultEnum resultEnum;
 
-    public GlobalException(ResultEnum resultEnum) {
+    public CustomizeException(ResultEnum resultEnum) {
         this.resultEnum = resultEnum;
     }
 }

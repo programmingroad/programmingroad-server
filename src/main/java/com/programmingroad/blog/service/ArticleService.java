@@ -37,6 +37,7 @@ public interface ArticleService {
      * 获取指定文章
      *
      * @param id
+     * @param released
      * @return
      */
     ArticleVO get(Long id, ReleasedEnum released);
