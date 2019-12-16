@@ -2,7 +2,7 @@ package com.programmingroad.blog.api;
 
 import com.programmingroad.blog.constant.CookieConstant;
 import com.programmingroad.blog.enums.ResultEnum;
-import com.programmingroad.blog.exception.BlogException;
+import com.programmingroad.blog.exception.GlobalException;
 import com.programmingroad.blog.service.UserService;
 import com.programmingroad.blog.utils.CookieUtil;
 import com.programmingroad.blog.utils.ResultUtil;
@@ -37,40 +37,28 @@ public class UserApi {
     @ApiOperation(value = "登录")
     @PostMapping("/login")
     public ResultVO<UserVO> login(@ApiParam(value = "github返回的code", required = true) @RequestParam("code") String code, HttpServletResponse response) {
-
-        log.info("【User】登录参数: code={};", code);
-
+        log.info("登录: code={};", code);
         UserVO userVO = userService.login(code, response);
-
-        return ResultUtil.success(userVO);
+        return ResultUtil.ok(userVO);
     }
 
     @ApiOperation(value = "登出")
     @GetMapping("/logout")
     public ResultVO<UserVO> logout(HttpServletRequest request, HttpServletResponse response) {
-
         String token = this.getToken(request);
-
-        log.info("【User】登出参数: token={};", token);
-
+        log.info("登出: token={};", token);
         userService.logout(token, response);
-
-        return ResultUtil.success(null);
+        return ResultUtil.ok();
     }
 
     @ApiOperation(value = "通过token获取用户信息")
     @GetMapping("/user")
     public ResultVO<UserVO> getUser(HttpServletRequest request) {
-
         String token = this.getToken(request);
-
-        log.info("【User】获取用户参数: token={};", token);
-
+        log.info("获取用户: token={};", token);
         UserVO userVO = userService.getUser(token);
-
-        return ResultUtil.success(userVO);
+        return ResultUtil.ok(userVO);
     }
-
 
     /**
      * 获取token
@@ -80,14 +68,10 @@ public class UserApi {
      */
     private String getToken(HttpServletRequest request) {
         Cookie cookie = CookieUtil.get(request, CookieConstant.TOKEN);
-
         if (cookie == null) {
-
             log.warn("cookie为null");
-
-            throw new BlogException(ResultEnum.ERROR);
+            throw new GlobalException(ResultEnum.UNAUTHORIZED);
         }
-
         return cookie.getValue();
     }
 }

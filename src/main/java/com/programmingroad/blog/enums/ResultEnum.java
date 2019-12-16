@@ -12,16 +12,29 @@ import lombok.Getter;
 public enum ResultEnum {
 
     /**
-     * 成功
+     * OK
      */
-    SUCCESS(0, "成功"),
+    OK(200, "OK"),
 
     /**
-     * 服务器错误
+     * Bad Request
      */
-    ERROR(-1, "服务器错误"),
+    BAD_REQUEST(400, "Bad Request"),
 
+    /**
+     * Unauthorized
+     */
+    UNAUTHORIZED(401, "Unauthorized"),
 
+    /**
+     * Forbidden
+     */
+    FORBIDDEN(403, "Forbidden"),
+
+    /**
+     * Internal Server Error
+     */
+    INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
     ;
 
     /**
@@ -34,10 +47,8 @@ public enum ResultEnum {
      */
     private String message;
 
-
     ResultEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
-
 }

@@ -19,11 +19,8 @@ public class GithubUserDTO2UserVOConverter {
      * @return
      */
     public static UserVO converter(GithubUserDTO githubUserDTO) {
-
         UserVO userVO = new UserVO();
-
         BeanUtils.copyProperties(githubUserDTO, userVO);
-
         return userVO;
     }
 }

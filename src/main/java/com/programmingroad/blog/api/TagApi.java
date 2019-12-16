@@ -26,6 +26,7 @@ import java.util.List;
 @Api(tags = "TagApi")
 @RestController
 @RequestMapping(value = "/api/tag")
+@Slf4j
 public class TagApi {
 
     @Autowired
@@ -33,12 +34,11 @@ public class TagApi {
 
     @ApiOperation(value = "获取所有标签")
     @GetMapping("/all")
-    public ResultVO<TagVO> getAll() {
-
+    public ResultVO<List<TagVO>> getAll() {
+        log.info("获取所有标签");
         List<TagVO> tagVOS = tagService.list();
         // 按照 create_time 升序排列
         Collections.reverse(tagVOS);
-
-        return ResultUtil.success(tagVOS);
+        return ResultUtil.ok(tagVOS);
     }
 }

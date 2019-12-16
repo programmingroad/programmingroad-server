@@ -11,7 +11,7 @@ import org.springframework.beans.BeanUtils;
  * @version: 1.0
  **/
 
-public class ArticleDTO2Article {
+public class ArticleDTO2ArticleConverter {
 
 
     /**
@@ -21,11 +21,8 @@ public class ArticleDTO2Article {
      * @return
      */
     public static Article converter(ArticleDTO articleDTO) {
-
         Article article = new Article();
-
         BeanUtils.copyProperties(articleDTO, article);
-
         return article;
     }
 }

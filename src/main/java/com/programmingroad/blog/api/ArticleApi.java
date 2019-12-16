@@ -33,21 +33,19 @@ public class ArticleApi {
 
     @ApiOperation(value = "通过标签获取已发布文章列表")
     @GetMapping("/listPage")
-    public ResultVO<List<ArticleVO>> getListPage(@ApiParam(value = "页码", required = true) @RequestParam("page") Integer page, @ApiParam(value = "标签id", required = true) @RequestParam("tagId") Long tagId) {
-
-        log.info("【Article】获取文章列表");
-
+    public ResultVO<List<ArticleVO>> getListPage(@ApiParam(value = "页码", required = true) @RequestParam("page") Integer page,
+                                                 @ApiParam(value = "标签id", required = true) @RequestParam("tagId") Long tagId) {
+        log.info("获取文章列表: page={}, tagId={};", page, tagId);
         IPage<ArticleVO> articleVOIPage = articleService.listPage(page, tagId, ReleasedEnum.RELEASED);
-
-        return ResultUtil.success(articleVOIPage);
+        return ResultUtil.ok(articleVOIPage);
     }
 
     @ApiOperation(value = "通过id获取文章")
     @GetMapping("/article/{id}")
     public ResultVO<ArticleVO> getContent(@ApiParam(value = "文章id", required = true) @PathVariable Long id) {
+        log.info("获取文章: id={};", id);
         ArticleVO articleVO = articleService.get(id, ReleasedEnum.RELEASED);
-
-        return ResultUtil.success(articleVO);
+        return ResultUtil.ok(articleVO);
     }
 
 }

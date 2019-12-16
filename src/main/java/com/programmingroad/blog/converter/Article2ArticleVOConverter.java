@@ -20,11 +20,8 @@ public class Article2ArticleVOConverter {
      * @return
      */
     public static ArticleVO converter(Article article) {
-
         ArticleVO articleVO = new ArticleVO();
-
         BeanUtils.copyProperties(article, articleVO);
-
         return articleVO;
     }
 }

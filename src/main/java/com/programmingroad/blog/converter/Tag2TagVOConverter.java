@@ -22,11 +22,8 @@ public class Tag2TagVOConverter {
      * @return
      */
     public static TagVO converter(Tag tag) {
-
         TagVO tagVO = new TagVO();
-
         BeanUtils.copyProperties(tag, tagVO);
-
         return tagVO;
     }
 
@@ -37,9 +34,7 @@ public class Tag2TagVOConverter {
      * @return
      */
     public static List<TagVO> converter(List<Tag> tags) {
-
         List<TagVO> tagVOS = tags.stream().map(tag -> converter(tag)).collect(Collectors.toList());
-
         return tagVOS;
     }
 }

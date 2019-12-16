@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.programmingroad.blog.constant.CookieConstant;
 import com.programmingroad.blog.constant.RedisConstant;
 import com.programmingroad.blog.converter.GithubUserDTO2UserVOConverter;
+import com.programmingroad.blog.enums.ResultEnum;
+import com.programmingroad.blog.exception.GlobalException;
 import com.programmingroad.blog.platform.github.dto.GithubUserDTO;
 import com.programmingroad.blog.platform.github.service.GithubService;
 import com.programmingroad.blog.service.UserService;
@@ -40,13 +42,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserVO login(String code, HttpServletResponse response) {
-
         GithubUserDTO githubUserDTO = githubService.getGithubUserByCode(code);
-
         if (!githubUserDTO.getLogin().equals(login)) {
-            // todo 添加权限
+            throw new GlobalException(ResultEnum.FORBIDDEN);
         }
-
         String token = UUID.randomUUID().toString();
         String key = String.format(RedisConstant.TOKEN_PREFIX, token);
         String value = JSON.toJSONString(githubUserDTO);
@@ -54,33 +53,23 @@ public class UserServiceImpl implements UserService {
         stringRedisTemplate.opsForValue().set(key, value, RedisConstant.EXPIRE, TimeUnit.SECONDS);
         // 配置token到cookie
         CookieUtil.set(response, CookieConstant.TOKEN, token, CookieConstant.EXPIRE);
-
         UserVO userVO = GithubUserDTO2UserVOConverter.converter(githubUserDTO);
-
         return userVO;
     }
 
     @Override
     public void logout(String token, HttpServletResponse response) {
-
         String key = String.format(RedisConstant.TOKEN_PREFIX, token);
-
         stringRedisTemplate.delete(key);
-
         CookieUtil.set(response, CookieConstant.TOKEN, null, 0);
     }
 
     @Override
     public UserVO getUser(String token) {
-
         String key = String.format(RedisConstant.TOKEN_PREFIX, token);
-
         String value = stringRedisTemplate.opsForValue().get(key);
-
         GithubUserDTO githubUserDTO = JSON.parseObject(value, GithubUserDTO.class);
-
         UserVO userVO = GithubUserDTO2UserVOConverter.converter(githubUserDTO);
-
         return userVO;
     }
 }

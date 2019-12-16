@@ -6,7 +6,6 @@ import com.programmingroad.blog.service.ArticleService;
 import com.programmingroad.blog.utils.ResultUtil;
 import com.programmingroad.blog.vo.ArticleVO;
 import com.programmingroad.blog.vo.ResultVO;
-import com.programmingroad.blog.vo.TagVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -35,42 +34,32 @@ public class AdminArticleApi {
     @ApiOperation(value = "文章列表")
     @GetMapping("/listPage")
     public ResultVO<List<ArticleVO>> getListPage(@ApiParam(value = "页码", required = true) @RequestParam("page") Integer page) {
-
-        log.info("【Article】获取文章列表");
-
+        log.info("文章列表: page={};", page);
         IPage<ArticleVO> articleVOIPage = articleService.listPage(page, null, null);
-
-        return ResultUtil.success(articleVOIPage);
+        return ResultUtil.ok(articleVOIPage);
     }
 
     @ApiOperation(value = "添加文章")
     @PutMapping("/add")
     public ResultVO add(@RequestBody ArticleDTO articleDTO) {
-
-        log.info("【Article】添加文章: articleDTO={};", articleDTO);
-
+        log.info("添加文章: articleDTO={};", articleDTO);
         articleService.add(articleDTO);
-
-        return ResultUtil.success(null);
+        return ResultUtil.ok();
     }
 
     @ApiOperation(value = "删除文章")
     @DeleteMapping("/delete/{id}")
     public ResultVO delete(@ApiParam(value = "文章id", required = true) @PathVariable Long id) {
-
-        log.info("【Article】删除标签: id={};", id);
-
+        log.info("删除文章: id={};", id);
         articleService.delete(id);
-
-        return ResultUtil.success(null);
+        return ResultUtil.ok();
     }
 
     @ApiOperation(value = "更新文章")
     @PatchMapping("/update/{id}")
     public ResultVO update(@ApiParam(value = "文章id", required = true) @PathVariable Long id, @RequestBody ArticleDTO articleDTO) {
-
+        log.info("更新文章: id={}, articleDTO={};", id, articleDTO);
         articleService.update(id, articleDTO);
-
-        return ResultUtil.success(null);
+        return ResultUtil.ok();
     }
 }

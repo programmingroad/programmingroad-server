@@ -6,6 +6,8 @@ import com.programmingroad.blog.vo.ResultHeadVO;
 import com.programmingroad.blog.vo.ResultPageVO;
 import com.programmingroad.blog.vo.ResultVO;
 
+import java.util.List;
+
 /**
  * @author: programmingroad
  * @create: 2019/10/06 12:58
@@ -14,47 +16,70 @@ import com.programmingroad.blog.vo.ResultVO;
 public class ResultUtil {
 
     /**
-     * 返回result
+     * result
      *
-     * @param resultHeadVO
-     * @param object
+     * @param resultEnum
+     * @param t
      * @param resultPageVO
+     * @param <T>
      * @return
      */
-    public static ResultVO result(ResultHeadVO resultHeadVO, Object object, ResultPageVO resultPageVO) {
-        return ResultVO.builder()
+    private static <T> ResultVO<T> result(ResultEnum resultEnum, T t, ResultPageVO resultPageVO) {
+        ResultHeadVO resultHeadVO = ResultHeadVO.builder()
+                .code(resultEnum.getCode())
+                .message(resultEnum.getMessage())
+                .build();
+        return ResultVO.<T>builder()
                 .head(resultHeadVO)
-                .body(object)
+                .body(t)
                 .page(resultPageVO)
                 .build();
     }
 
     /**
-     * 成功+消息体
+     * ok
      *
-     * @param object
+     * @param iPage
+     * @param <T>
      * @return
      */
-    public static ResultVO success(Object object) {
-        ResultEnum success = ResultEnum.SUCCESS;
-
-        ResultHeadVO resultHeadVO = ResultHeadVO.builder()
-                .code(success.getCode())
-                .message(success.getMessage())
+    public static <T> ResultVO<List<T>> ok(IPage<T> iPage) {
+        ResultPageVO resultPageVO = ResultPageVO.builder()
+                .currPage(iPage.getCurrent())
+                .pageSize(iPage.getSize())
+                .totalCount(iPage.getTotal())
+                .totalPage(iPage.getPages())
                 .build();
+        return result(ResultEnum.OK, iPage.getRecords(), resultPageVO);
 
-        if (object instanceof IPage) {
-            IPage objectIPage = (IPage) object;
+    }
 
-            ResultPageVO resultPageVO = ResultPageVO.builder()
-                    .currPage(objectIPage.getCurrent())
-                    .pageSize(objectIPage.getSize())
-                    .totalCount(objectIPage.getTotal())
-                    .totalPage(objectIPage.getPages())
-                    .build();
+    /**
+     * ok
+     *
+     * @param t
+     * @param <T>
+     * @return
+     */
+    public static <T> ResultVO<T> ok(T t) {
+        return result(ResultEnum.OK, t, null);
+    }
 
-            return result(resultHeadVO, objectIPage.getRecords(), resultPageVO);
-        }
-        return result(resultHeadVO, object, null);
+    /**
+     * ok
+     *
+     * @return
+     */
+    public static ResultVO ok() {
+        return result(ResultEnum.OK, null, null);
+    }
+
+    /**
+     * error
+     *
+     * @return
+     */
+    public static ResultVO error(ResultEnum resultEnum) {
+        return result(resultEnum, null, null);
     }
 }

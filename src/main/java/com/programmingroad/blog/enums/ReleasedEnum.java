@@ -35,7 +35,6 @@ public enum ReleasedEnum {
      */
     private String message;
 
-
     ReleasedEnum(Byte code, String message) {
         this.code = code;
         this.message = message;

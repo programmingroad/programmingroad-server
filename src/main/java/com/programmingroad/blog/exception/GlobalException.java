@@ -10,13 +10,11 @@ import lombok.Getter;
  **/
 
 @Getter
-public class BlogException extends RuntimeException {
+public class GlobalException extends RuntimeException {
 
-    private Integer code;
+    private ResultEnum resultEnum;
 
-    public BlogException(ResultEnum resultEnum) {
-        super(resultEnum.getMessage());
-        this.code = resultEnum.getCode();
-
+    public GlobalException(ResultEnum resultEnum) {
+        this.resultEnum = resultEnum;
     }
 }

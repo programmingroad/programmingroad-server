@@ -25,26 +25,18 @@ public class GithubServiceImpl implements GithubService {
 
     @Override
     public GithubUserDTO getGithubUserByCode(String code) {
-
         String accessToken = githubManager.getAccessTokenByCode(code);
-
         log.info("通过code获取accessToken: code={}, accessToken={};", code, accessToken);
-
         String githubUserStr = githubManager.getGithubUserByAccessToken(accessToken);
-
         log.info("通过accessToken获取用户信息: accessToken={}, user={};", accessToken, githubUserStr);
-
         JSONObject jsonObject = JSON.parseObject(githubUserStr);
-
         GithubUserDTO githubUserDTO = GithubUserDTO.builder()
                 .id(jsonObject.getLong(GithubConstant.ID))
                 .login(jsonObject.getString(GithubConstant.LOGIN))
                 .avatarUrl(jsonObject.getString(GithubConstant.AVATAR_URL))
                 .htmlUrl(jsonObject.getString(GithubConstant.HTML_URL))
                 .build();
-
         log.info("生成dto: githubUserDTO={};", githubUserDTO);
-
         return githubUserDTO;
     }
 }

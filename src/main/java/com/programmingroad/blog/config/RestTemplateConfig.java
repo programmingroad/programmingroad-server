@@ -40,7 +40,6 @@ public class RestTemplateConfig {
     private HttpClient httpClient() {
         //不使用连接池，后续根据性能情况再考虑
         BasicHttpClientConnectionManager connectionManager = new BasicHttpClientConnectionManager();
-
         RequestConfig requestConfig = RequestConfig.custom()
                 // 服务器返回数据(response)的时间，超过该时间抛出read timeout
                 .setSocketTimeout(soTimeout)
@@ -48,7 +47,6 @@ public class RestTemplateConfig {
                 .setConnectTimeout(conTimeout)
                 .setCookieSpec(CookieSpecs.STANDARD)
                 .build();
-
         return HttpClientBuilder.create()
                 .setDefaultRequestConfig(requestConfig)
                 .setConnectionManager(connectionManager)

@@ -41,37 +41,24 @@ public class GithubManagerImpl implements GithubManager {
 
     @Override
     public String getAccessTokenByCode(String code) {
-
         Map<String, Object> requestMap = new HashMap<>(3);
-
         requestMap.put(GithubConstant.CLIENT_ID, this.clientId);
         requestMap.put(GithubConstant.CLIENT_SECRET, this.clientSecret);
         requestMap.put(GithubConstant.CODE, code);
-
         HttpHeaders headers = new HttpHeaders();
-
         headers.setContentType(MediaType.APPLICATION_JSON);
-
         HttpEntity<Map<String, Object>> request = new HttpEntity<>(requestMap, headers);
-
         ResponseEntity<String> stringResponseEntity = restTemplate.postForEntity(this.accessTokenUrl, request, String.class);
-
         String accessTokenResp = stringResponseEntity.getBody();
-
         String[] urlArray = accessTokenResp.split("&");
-
         if (urlArray.length == 0) {
             return null;
         }
-
         String[] paramArray = urlArray[0].split("=");
-
         if (paramArray.length == 0) {
             return null;
         }
-
         String accessToken = paramArray[1];
-
         return accessToken;
     }
 
@@ -79,9 +66,7 @@ public class GithubManagerImpl implements GithubManager {
     public String getGithubUserByAccessToken(String accessToken) {
         ResponseEntity<String> responseEntity = restTemplate
                 .getForEntity(this.userUrl + "?" + GithubConstant.ACCESS_TOKEN + "=" + accessToken, String.class);
-
         String githubUserStr = responseEntity.getBody();
-
         return githubUserStr;
     }
 }
