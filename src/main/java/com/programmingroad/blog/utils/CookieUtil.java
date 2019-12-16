@@ -1,5 +1,10 @@
 package com.programmingroad.blog.utils;
 
+import com.programmingroad.blog.constant.CookieConstant;
+import com.programmingroad.blog.enums.ResultEnum;
+import com.programmingroad.blog.exception.GlobalException;
+import lombok.extern.slf4j.Slf4j;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +16,8 @@ import java.util.Map;
  * @create: 2019/10/07 13:50
  * @description:
  **/
+
+@Slf4j
 public class CookieUtil {
 
     /**
@@ -55,5 +62,20 @@ public class CookieUtil {
             }
         }
         return cookieMap;
+    }
+
+    /**
+     * 获取token
+     *
+     * @param request
+     * @return
+     */
+    public static String getToken(HttpServletRequest request) {
+        Cookie cookie = get(request, CookieConstant.TOKEN);
+        if (cookie == null) {
+            log.warn("cookie为null");
+            throw new GlobalException(ResultEnum.UNAUTHORIZED);
+        }
+        return cookie.getValue();
     }
 }

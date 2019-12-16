@@ -5,6 +5,7 @@ import com.programmingroad.blog.utils.ResultUtil;
 import com.programmingroad.blog.vo.ResultVO;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * @author: programmingroad
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  * @description:
  **/
 
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = GlobalException.class)

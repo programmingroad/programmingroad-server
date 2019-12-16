@@ -45,7 +45,7 @@ public class UserApi {
     @ApiOperation(value = "登出")
     @GetMapping("/logout")
     public ResultVO<UserVO> logout(HttpServletRequest request, HttpServletResponse response) {
-        String token = this.getToken(request);
+        String token = CookieUtil.getToken(request);
         log.info("登出: token={};", token);
         userService.logout(token, response);
         return ResultUtil.ok();
@@ -54,24 +54,9 @@ public class UserApi {
     @ApiOperation(value = "通过token获取用户信息")
     @GetMapping("/user")
     public ResultVO<UserVO> getUser(HttpServletRequest request) {
-        String token = this.getToken(request);
+        String token = CookieUtil.getToken(request);
         log.info("获取用户: token={};", token);
         UserVO userVO = userService.getUser(token);
         return ResultUtil.ok(userVO);
-    }
-
-    /**
-     * 获取token
-     *
-     * @param request
-     * @return
-     */
-    private String getToken(HttpServletRequest request) {
-        Cookie cookie = CookieUtil.get(request, CookieConstant.TOKEN);
-        if (cookie == null) {
-            log.warn("cookie为null");
-            throw new GlobalException(ResultEnum.UNAUTHORIZED);
-        }
-        return cookie.getValue();
     }
 }
