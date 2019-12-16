@@ -1,32 +1,3 @@
-# spring 相关配置
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://101.200.126.20:3306/programmingroad
-    username: root
-    password: root
-  redis:
-    host: 101.200.126.20
-    port: 6379
-  jackson:
-    default-property-inclusion: non_null
-    date-format: yyyy-MM-dd HH:mm:ss
-
-# mp相关配置
-mybatis-plus:
-  type-enums-package: com.programmingroad.blog.enums
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
-# http相关配置
-httpclient:
-  conTimeout: 3000   #连接超时时间
-  soTimeout: 30000   #响应超时时间
-
-# github相关配置
-github:
-  clientId: 90311b932a081ea68e12
-  clientSecret: 3bfa18de6d5e89050a898d8e696c176ce96b8973
-  accessTokenUrl: https://github.com/login/oauth/access_token
-  userUrl: https://api.github.com/user
-  login: programmingroad
+  profiles:
+    active: dev
