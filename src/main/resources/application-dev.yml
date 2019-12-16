@@ -6,7 +6,7 @@ blog:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://101.200.126.20:3306/programmingroad
+    url: jdbc:mysql://101.200.126.20:3306/programmingroad?useSSL=false
     username: root
     password: root
   redis:
