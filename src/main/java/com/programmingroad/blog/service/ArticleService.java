@@ -50,6 +50,13 @@ public interface ArticleService {
     void delete(Long id);
 
     /**
+     * 通过tagId删除文章
+     *
+     * @param tagId
+     */
+    void deleteByTagId(Long tagId);
+
+    /**
      * 更新文章
      *
      * @param id

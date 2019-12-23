@@ -4,11 +4,13 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.programmingroad.blog.converter.Tag2TagVOConverter;
 import com.programmingroad.blog.domain.Tag;
 import com.programmingroad.blog.mapper.TagMapper;
+import com.programmingroad.blog.service.ArticleService;
 import com.programmingroad.blog.service.TagService;
 import com.programmingroad.blog.vo.TagVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,6 +28,9 @@ public class TagServiceImpl implements TagService {
     @Autowired
     private TagMapper tagMapper;
 
+    @Autowired
+    private ArticleService articleService;
+
     @Override
     public List<TagVO> list() {
         // 按照 create_time 降序查询
@@ -42,7 +47,9 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void delete(Long id) {
         tagMapper.deleteById(id);
+        articleService.deleteByTagId(id);
     }
 }

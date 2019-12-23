@@ -33,19 +33,19 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public IPage<ArticleVO> listPage(Integer currPage, Long tagId, ReleasedEnum released) {
-        LambdaQueryWrapper<Article> select = Wrappers.<Article>lambdaQuery()
+        LambdaQueryWrapper<Article> lambdaQueryWrapper = Wrappers.<Article>lambdaQuery()
                 .select(Article::getId, Article::getTitle, Article::getCreateTime);
         // 是否添加 tagId 筛选条件
         if (tagId != null) {
-            select.eq(Article::getTagId, tagId);
+            lambdaQueryWrapper.eq(Article::getTagId, tagId);
         }
         // 是否添加 released 筛选条件
         if (released != null) {
-            select.eq(Article::getReleased, released);
+            lambdaQueryWrapper.eq(Article::getReleased, released);
         }
         // 按照 create_time 倒序排列
-        select.orderByDesc(Article::getCreateTime);
-        IPage<Article> articleIPage = articleMapper.selectPage(new Page<>(currPage, Constant.PAGE_SIZE), select);
+        lambdaQueryWrapper.orderByDesc(Article::getCreateTime);
+        IPage<Article> articleIPage = articleMapper.selectPage(new Page<>(currPage, Constant.PAGE_SIZE), lambdaQueryWrapper);
         return articleIPage.convert(article -> (Article2ArticleVOConverter.converter(article)));
     }
 
@@ -57,17 +57,23 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public ArticleVO get(Long id, ReleasedEnum released) {
-        LambdaQueryWrapper<Article> select = Wrappers.<Article>lambdaQuery().eq(Article::getId, id);
+        LambdaQueryWrapper<Article> lambdaQueryWrapper = Wrappers.<Article>lambdaQuery().eq(Article::getId, id);
         if (released != null) {
-            select.eq(Article::getReleased, released);
+            lambdaQueryWrapper.eq(Article::getReleased, released);
         }
-        Article article = articleMapper.selectOne(select);
+        Article article = articleMapper.selectOne(lambdaQueryWrapper);
         return Article2ArticleVOConverter.converter(article);
     }
 
     @Override
     public void delete(Long id) {
         articleMapper.deleteById(id);
+    }
+
+    @Override
+    public void deleteByTagId(Long tagId) {
+        LambdaQueryWrapper<Article> lambdaQueryWrapper = Wrappers.<Article>lambdaQuery().eq(Article::getTagId, tagId);
+        articleMapper.delete(lambdaQueryWrapper);
     }
 
     @Override
