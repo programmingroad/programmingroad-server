@@ -2,6 +2,7 @@ package com.programmingroad.blog.api.admin;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.programmingroad.blog.dto.ArticleDTO;
+import com.programmingroad.blog.enums.ReleasedEnum;
 import com.programmingroad.blog.service.ArticleService;
 import com.programmingroad.blog.utils.ResultUtil;
 import com.programmingroad.blog.vo.ArticleVO;
@@ -33,9 +34,11 @@ public class AdminArticleApi {
 
     @ApiOperation(value = "文章列表")
     @GetMapping("/listPage")
-    public ResultVO<List<ArticleVO>> getListPage(@ApiParam(value = "页码", required = true) @RequestParam("page") Integer page) {
+    public ResultVO<List<ArticleVO>> getListPage(@ApiParam(value = "页码", required = true) @RequestParam("page") Integer page,
+                                                 @ApiParam(value = "标签id", required = true) @RequestParam("tagId") Long tagId,
+                                                 @ApiParam(value = "是否发布", required = true) @RequestParam("released") ReleasedEnum released) {
         log.info("文章列表: page={};", page);
-        IPage<ArticleVO> articleVOIPage = articleService.listPage(page, null, null);
+        IPage<ArticleVO> articleVOIPage = articleService.listPage(page, tagId, released);
         return ResultUtil.ok(articleVOIPage);
     }
 
