@@ -23,6 +23,9 @@ public class ArticleVO {
     @ApiModelProperty(value = "文章id")
     private Long id;
 
+    @ApiModelProperty(value = "标签id")
+    private Long tagId;
+
     @ApiModelProperty(value = "标题")
     private String title;
 

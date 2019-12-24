@@ -42,13 +42,22 @@ public class AdminArticleApi {
         return ResultUtil.ok(articleVOIPage);
     }
 
-    @ApiOperation(value = "添加文章")
-    @PutMapping("/add")
-    public ResultVO add(@RequestBody ArticleDTO articleDTO) {
-        log.info("添加文章: articleDTO={};", articleDTO);
-        articleService.add(articleDTO);
+    @ApiOperation(value = "保存文章")
+    @PutMapping("/save")
+    public ResultVO<ArticleVO> save(@RequestBody ArticleDTO articleDTO) {
+        log.info("保存文章: articleDTO={};", articleDTO);
+        ArticleVO articleVO = articleService.save(articleDTO);
+        return ResultUtil.ok(articleVO);
+    }
+
+    @ApiOperation(value = "发布文章")
+    @PatchMapping("/release/{id}")
+    public ResultVO release(@ApiParam(value = "文章id", required = true) @PathVariable Long id) {
+        log.info("发布文章: id={};", id);
+        articleService.release(id);
         return ResultUtil.ok();
     }
+
 
     @ApiOperation(value = "删除文章")
     @DeleteMapping("/delete/{id}")
@@ -64,5 +73,13 @@ public class AdminArticleApi {
         log.info("更新文章: id={}, articleDTO={};", id, articleDTO);
         articleService.update(id, articleDTO);
         return ResultUtil.ok();
+    }
+
+    @ApiOperation(value = "通过id获取文章")
+    @GetMapping("/article/{id}")
+    public ResultVO<ArticleVO> getContent(@ApiParam(value = "文章id", required = true) @PathVariable Long id) {
+        log.info("获取文章: id={};", id);
+        ArticleVO articleVO = articleService.get(id, null);
+        return ResultUtil.ok(articleVO);
     }
 }

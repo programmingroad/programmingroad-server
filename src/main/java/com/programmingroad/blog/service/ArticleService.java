@@ -1,12 +1,9 @@
 package com.programmingroad.blog.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.programmingroad.blog.dto.ArticleDTO;
 import com.programmingroad.blog.enums.ReleasedEnum;
 import com.programmingroad.blog.vo.ArticleVO;
-
-import java.util.List;
 
 /**
  * @author: baoqi.liu
@@ -27,11 +24,19 @@ public interface ArticleService {
     IPage<ArticleVO> listPage(Integer currPage, Long tagId, ReleasedEnum released);
 
     /**
-     * 添加文章
+     * 保存文章
      *
      * @param articleDTO
+     * @return
      */
-    void add(ArticleDTO articleDTO);
+    ArticleVO save(ArticleDTO articleDTO);
+
+    /**
+     * 发布文章
+     *
+     * @param id
+     */
+    void release(Long id);
 
     /**
      * 获取指定文章

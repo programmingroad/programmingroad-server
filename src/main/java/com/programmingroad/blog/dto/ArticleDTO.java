@@ -31,7 +31,4 @@ public class ArticleDTO {
     @ApiModelProperty(value = "内容")
     private String content;
 
-    @ApiModelProperty(value = "是否发布")
-    private ReleasedEnum released;
-
 }
