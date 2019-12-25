@@ -50,19 +50,10 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ArticleVO save(ArticleDTO articleDTO) {
+    public ArticleVO add(ArticleDTO articleDTO) {
         Article article = ArticleDTO2ArticleConverter.converter(articleDTO);
         articleMapper.insert(article);
         return Article2ArticleVOConverter.converter(article);
-    }
-
-    @Override
-    public void release(Long id) {
-        Article article = Article.builder()
-                .id(id)
-                .released(ReleasedEnum.RELEASED)
-                .build();
-        articleMapper.updateById(article);
     }
 
     @Override

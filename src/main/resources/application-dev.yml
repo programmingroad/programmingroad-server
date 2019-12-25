@@ -12,6 +12,7 @@ spring:
   redis:
     host: 101.200.126.20
     port: 6379
+    password: root
   jackson:
     default-property-inclusion: non_null
     date-format: yyyy-MM-dd HH:mm:ss

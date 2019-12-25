@@ -24,19 +24,12 @@ public interface ArticleService {
     IPage<ArticleVO> listPage(Integer currPage, Long tagId, ReleasedEnum released);
 
     /**
-     * 保存文章
+     * 添加文章
      *
      * @param articleDTO
      * @return
      */
-    ArticleVO save(ArticleDTO articleDTO);
-
-    /**
-     * 发布文章
-     *
-     * @param id
-     */
-    void release(Long id);
+    ArticleVO add(ArticleDTO articleDTO);
 
     /**
      * 获取指定文章

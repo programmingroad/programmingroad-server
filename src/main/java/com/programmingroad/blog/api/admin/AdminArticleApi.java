@@ -42,22 +42,13 @@ public class AdminArticleApi {
         return ResultUtil.ok(articleVOIPage);
     }
 
-    @ApiOperation(value = "保存文章")
-    @PutMapping("/save")
-    public ResultVO<ArticleVO> save(@RequestBody ArticleDTO articleDTO) {
-        log.info("保存文章: articleDTO={};", articleDTO);
-        ArticleVO articleVO = articleService.save(articleDTO);
-        return ResultUtil.ok(articleVO);
-    }
-
-    @ApiOperation(value = "发布文章")
-    @PatchMapping("/release/{id}")
-    public ResultVO release(@ApiParam(value = "文章id", required = true) @PathVariable Long id) {
-        log.info("发布文章: id={};", id);
-        articleService.release(id);
+    @ApiOperation(value = "添加文章")
+    @PutMapping("/add")
+    public ResultVO add(@RequestBody ArticleDTO articleDTO) {
+        log.info("添加文章: articleDTO={};", articleDTO);
+        articleService.add(articleDTO);
         return ResultUtil.ok();
     }
-
 
     @ApiOperation(value = "删除文章")
     @DeleteMapping("/delete/{id}")
