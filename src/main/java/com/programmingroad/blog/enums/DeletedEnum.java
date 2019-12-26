@@ -16,12 +16,12 @@ public enum DeletedEnum {
     /**
      * 未删除
      */
-    NOT_DELETE((byte) 0, "未删除"),
+    NOT_DELETE(0, "未删除"),
 
     /**
      * 已删除
      */
-    DELETED((byte) 1, "已删除"),
+    DELETED(1, "已删除"),
 
     ;
 
@@ -29,7 +29,7 @@ public enum DeletedEnum {
      * code码
      */
     @EnumValue
-    private Byte code;
+    private Integer code;
 
     /**
      * 提示消息
@@ -37,7 +37,7 @@ public enum DeletedEnum {
     private String message;
 
 
-    DeletedEnum(Byte code, String message) {
+    DeletedEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }

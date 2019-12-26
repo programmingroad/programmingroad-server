@@ -1,5 +1,6 @@
 package com.programmingroad.blog.vo;
 
+import com.programmingroad.blog.enums.ReleasedEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -32,7 +33,7 @@ public class ArticleVO {
     @ApiModelProperty(value = "内容")
     private String content;
 
-    @ApiModelProperty(value = "文章创建时间")
-    private Date createTime;
+    @ApiModelProperty(value = "是否发布")
+    private ReleasedEnum released;
 
 }

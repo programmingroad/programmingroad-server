@@ -16,26 +16,26 @@ public enum ReleasedEnum {
     /**
      * 未发布
      */
-    NOT_RELEASE((byte) 0, "未发布"),
+    NOT_RELEASE(0, "未发布"),
 
     /**
      * 已发布
      */
-    RELEASED((byte) 1, "已发布"),
+    RELEASED(1, "已发布"),
     ;
 
     /**
      * code码
      */
     @EnumValue
-    private Byte code;
+    private Integer code;
 
     /**
      * 提示消息
      */
     private String message;
 
-    ReleasedEnum(Byte code, String message) {
+    ReleasedEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
