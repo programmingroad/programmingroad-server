@@ -1,16 +1,22 @@
+# blog 相关配置
+blog:
+  static-locations: /blog/image
+
 # spring 相关配置
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://101.200.126.20:3306/programmingroad?useSSL=false
+    url: jdbc:mysql://localhost:3306/programmingroad?useSSL=false
     username: root
     password: root
   redis:
-    host: 101.200.126.20
+    host: localhost
     port: 6379
   jackson:
     default-property-inclusion: non_null
     date-format: yyyy-MM-dd HH:mm:ss
+  resources:
+    static-locations: file:${blog.static-locations}
 
 # mp相关配置
 mybatis-plus:
