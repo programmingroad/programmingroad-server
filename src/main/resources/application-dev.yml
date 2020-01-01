@@ -1,6 +1,6 @@
 ## blog 相关配置
 blog:
-  static-locations: D:\blog\image
+  static-locations: D:\blog
 
 # spring 相关配置
 spring:

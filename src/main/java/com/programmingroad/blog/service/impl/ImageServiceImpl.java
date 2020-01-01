@@ -26,10 +26,13 @@ public class ImageServiceImpl implements ImageService {
     @Value("${blog.static-locations}")
     private String staticLocation;
 
+    private final String imagePrefix = "/api/image";
+
     @Override
     public ImageVO uploadImage(MultipartFile multipartFile) throws IOException {
-        File destFile = Paths.get(this.staticLocation, System.currentTimeMillis() + "_" + multipartFile.getOriginalFilename()).toFile();
-        multipartFile.transferTo(destFile);
-        return ImageVO.builder().url(destFile.getName()).build();
+        String imageUrl = Paths.get(this.imagePrefix, System.currentTimeMillis() + "_" + multipartFile.getOriginalFilename()).toString();
+        File destFile = Paths.get(this.staticLocation, imageUrl).toFile();
+        FileUtils.writeByteArrayToFile(destFile, multipartFile.getBytes());
+        return ImageVO.builder().url(imageUrl).build();
     }
 }

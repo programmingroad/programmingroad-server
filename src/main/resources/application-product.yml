@@ -1,6 +1,6 @@
 # blog 相关配置
 blog:
-  static-locations: /blog/image
+  static-locations: /blog
 
 # spring 相关配置
 spring:
