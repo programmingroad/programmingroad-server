@@ -1,6 +1,6 @@
-# blog 相关配置
+# blog 静态资源相关配置 (需要和docker的挂载目录一致)
 blog:
-  static-locations: /blog
+  static-locations: /server/static
 
 # spring 相关配置
 spring:
