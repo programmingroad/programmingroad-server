@@ -6,7 +6,7 @@ blog:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.233.128:3306/programmingroad?useSSL=false
+    url: jdbc:mysql://192.168.233.128:3306/programmingroad?useSSL=false&serverTimezone=GMT%2B8
     username: root
     password: root
   redis:
@@ -15,6 +15,7 @@ spring:
   jackson:
     default-property-inclusion: non_null
     date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
   resources:
     static-locations: file:${blog.static-locations}
 
