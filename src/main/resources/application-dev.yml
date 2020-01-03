@@ -6,13 +6,12 @@ blog:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://101.200.126.20:3306/programmingroad?useSSL=false
+    url: jdbc:mysql://192.168.233.128:3306/programmingroad?useSSL=false
     username: root
     password: root
   redis:
-    host: 101.200.126.20
+    host: 192.168.233.128
     port: 6379
-    password: root
   jackson:
     default-property-inclusion: non_null
     date-format: yyyy-MM-dd HH:mm:ss
