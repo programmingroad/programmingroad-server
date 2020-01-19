@@ -39,6 +39,11 @@ public class Article {
     private String title;
 
     /**
+     * 描述
+     */
+    private String description;
+
+    /**
      * 内容
      */
     private String content;

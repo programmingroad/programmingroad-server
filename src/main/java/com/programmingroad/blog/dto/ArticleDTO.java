@@ -28,6 +28,9 @@ public class ArticleDTO {
     @ApiModelProperty(value = "标题")
     private String title;
 
+    @ApiModelProperty(value = "描述")
+    private String description;
+
     @ApiModelProperty(value = "内容")
     private String content;
 

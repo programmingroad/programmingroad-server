@@ -34,7 +34,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public IPage<ArticleVO> listPage(Integer currPage, Long tagId, ReleasedEnum released) {
         LambdaQueryWrapper<Article> lambdaQueryWrapper = Wrappers.<Article>lambdaQuery()
-                .select(Article::getId, Article::getTitle, Article::getCreateTime);
+                .select(Article::getId, Article::getTitle, Article::getDescription, Article::getCreateTime);
         // 是否添加 tagId 筛选条件
         if (tagId != null) {
             lambdaQueryWrapper.eq(Article::getTagId, tagId);

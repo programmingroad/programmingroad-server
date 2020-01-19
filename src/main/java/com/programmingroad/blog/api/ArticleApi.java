@@ -47,5 +47,4 @@ public class ArticleApi {
         ArticleVO articleVO = articleService.get(id, ReleasedEnum.RELEASED);
         return ResultUtil.ok(articleVO);
     }
-
 }
