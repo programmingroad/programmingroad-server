@@ -1,6 +1,8 @@
 ## blog 相关配置
 blog:
   static-locations: D:\blog
+  content-image-prefix: \api\image\content
+  cover-image-prefix: \api\image\cover
 
 # spring 相关配置
 spring:

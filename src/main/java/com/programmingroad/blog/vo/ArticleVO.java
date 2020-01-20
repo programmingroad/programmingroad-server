@@ -42,4 +42,7 @@ public class ArticleVO {
     @ApiModelProperty(value = "是否发布")
     private ReleasedEnum released;
 
+    @ApiModelProperty(value = "封面url")
+    private String cover;
+
 }

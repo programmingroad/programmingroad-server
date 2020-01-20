@@ -1,6 +1,8 @@
 # blog 静态资源相关配置 (需要和docker的挂载目录一致)
 blog:
   static-locations: /server/static
+  content-image-prefix: /api/image/content
+  cover-image-prefix: /api/image/cover
 
 # spring 相关配置
 spring:
