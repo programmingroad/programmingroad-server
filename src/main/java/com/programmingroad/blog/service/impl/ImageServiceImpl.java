@@ -1,12 +1,12 @@
 package com.programmingroad.blog.service.impl;
 
-import com.programmingroad.blog.converter.Cover2ImageVOConverter;
 import com.programmingroad.blog.domain.Cover;
 import com.programmingroad.blog.mapper.CoverMapper;
 import com.programmingroad.blog.service.ImageService;
 import com.programmingroad.blog.vo.ImageVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author: baoqi.liu
@@ -68,12 +69,25 @@ public class ImageServiceImpl implements ImageService {
     @Cacheable(value = "image", key = "'cover'")
     public List<ImageVO> listCoverImages() {
         List<Cover> covers = coverMapper.selectList(null);
-        return Cover2ImageVOConverter.converter(covers);
+        return covers.stream().map(cover -> this.cover2ImageVOConverter(cover)).collect(Collectors.toList());
     }
 
     @Override
     @CacheEvict(value = "image", key = "'cover'")
     public void deleteCoverImage(Long id) {
         coverMapper.deleteById(id);
+    }
+
+
+    /**
+     * Cover -> ImageVO
+     *
+     * @param cover
+     * @return
+     */
+    private ImageVO cover2ImageVOConverter(Cover cover) {
+        ImageVO imageVO = new ImageVO();
+        BeanUtils.copyProperties(cover, imageVO);
+        return imageVO;
     }
 }

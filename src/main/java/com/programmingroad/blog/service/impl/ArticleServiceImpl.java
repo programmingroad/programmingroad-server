@@ -5,17 +5,21 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.programmingroad.blog.constant.Constant;
-import com.programmingroad.blog.converter.Article2ArticleVOConverter;
-import com.programmingroad.blog.converter.ArticleDTO2ArticleConverter;
 import com.programmingroad.blog.domain.Article;
 import com.programmingroad.blog.dto.ArticleDTO;
 import com.programmingroad.blog.enums.ReleasedEnum;
 import com.programmingroad.blog.mapper.ArticleMapper;
 import com.programmingroad.blog.service.ArticleService;
+import com.programmingroad.blog.service.ImageService;
+import com.programmingroad.blog.utils.RandomUtil;
 import com.programmingroad.blog.vo.ArticleVO;
+import com.programmingroad.blog.vo.ImageVO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author: baoqi.liu
@@ -30,6 +34,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private ArticleMapper articleMapper;
+
+    @Autowired
+    private ImageService imageService;
 
     @Override
     public IPage<ArticleVO> listPage(Integer currPage, Long tagId, ReleasedEnum released) {
@@ -46,14 +53,14 @@ public class ArticleServiceImpl implements ArticleService {
         // 按照 create_time 倒序排列
         lambdaQueryWrapper.orderByDesc(Article::getCreateTime);
         IPage<Article> articleIPage = articleMapper.selectPage(new Page<>(currPage, Constant.PAGE_SIZE), lambdaQueryWrapper);
-        return articleIPage.convert(article -> (Article2ArticleVOConverter.converter(article)));
+        return articleIPage.convert(article -> this.article2ArticleVOConverter(article));
     }
 
     @Override
     public ArticleVO add(ArticleDTO articleDTO) {
-        Article article = ArticleDTO2ArticleConverter.converter(articleDTO);
+        Article article = this.articleDTO2ArticleConverter(articleDTO);
         articleMapper.insert(article);
-        return Article2ArticleVOConverter.converter(article);
+        return this.article2ArticleVOConverter(article);
     }
 
     @Override
@@ -63,7 +70,7 @@ public class ArticleServiceImpl implements ArticleService {
             lambdaQueryWrapper.eq(Article::getReleased, released);
         }
         Article article = articleMapper.selectOne(lambdaQueryWrapper);
-        return Article2ArticleVOConverter.converter(article);
+        return this.article2ArticleVOConverter(article);
     }
 
     @Override
@@ -79,8 +86,44 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public void update(Long id, ArticleDTO articleDTO) {
-        Article article = ArticleDTO2ArticleConverter.converter(articleDTO);
+        Article article = this.articleDTO2ArticleConverter(articleDTO);
         article.setId(id);
         articleMapper.updateById(article);
+    }
+
+    /**
+     * Article -> ArticleVO
+     *
+     * @param article
+     * @return
+     */
+    private ArticleVO article2ArticleVOConverter(Article article) {
+        ArticleVO articleVO = new ArticleVO();
+        BeanUtils.copyProperties(article, articleVO);
+        articleVO.setCover(this.getRandomCover());
+        return articleVO;
+    }
+
+    /**
+     * ArticleDTO -> Article
+     *
+     * @param articleDTO
+     * @return
+     */
+    private Article articleDTO2ArticleConverter(ArticleDTO articleDTO) {
+        Article article = new Article();
+        BeanUtils.copyProperties(articleDTO, article);
+        return article;
+    }
+
+    /**
+     * 随机获取封面图片
+     *
+     * @return
+     */
+    private String getRandomCover() {
+        List<ImageVO> imageVOS = imageService.listCoverImages();
+        Integer index = RandomUtil.getRandom(imageVOS.size());
+        return imageVOS.get(index).getUrl();
     }
 }
