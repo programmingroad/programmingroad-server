@@ -1,18 +1,18 @@
-## blog 相关配置
+# blog 静态资源相关配置 (需要和docker的挂载目录一致)
 blog:
-  static-locations: D:\blog
-  content-image-prefix: \api\image\content
-  cover-image-prefix: \api\image\cover
+  static-locations: /server/static
+  content-image-prefix: /api/image/content
+  cover-image-prefix: /api/image/cover
 
 # spring 相关配置
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.233.129:3306/programmingroad?useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/programmingroad?useSSL=false&serverTimezone=GMT%2B8
     username: root
     password: eL4Np8-qW%)1
   redis:
-    host: 192.168.233.129
+    host: localhost
     port: 6379
   jackson:
     default-property-inclusion: non_null
@@ -24,8 +24,6 @@ spring:
 # mp相关配置
 mybatis-plus:
   type-enums-package: com.programmingroad.blog.enums
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 # http相关配置
 httpclient:
@@ -34,8 +32,8 @@ httpclient:
 
 # github相关配置
 github:
-  clientId: 5dfae2bfcb88e364ac56
-  clientSecret: d1faa8a542a86422f1592fd98a8bee67380a433c
+  clientId: 98debc9a8d5444f00b6d
+  clientSecret: c4516e4a7c1d51cb5beeb0d75f95a28b6bdad69d
   accessTokenUrl: https://github.com/login/oauth/access_token
   userUrl: https://api.github.com/user
   login: programmingroad
